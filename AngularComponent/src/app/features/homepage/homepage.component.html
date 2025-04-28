@@ -12,5 +12,12 @@
     </div>
 </div>
 
-<app-child [messageFromParent]="ParentMessage"></app-child>
+<app-child 
+  [messageFromParent]="ParentMessage" 
+  (messageToParent)="messageToParent()">
+</app-child>
 
+<p class="mt-3">
+  <strong>Message from Child:</strong>
+  {{ ChildMessage }}
+</p>
