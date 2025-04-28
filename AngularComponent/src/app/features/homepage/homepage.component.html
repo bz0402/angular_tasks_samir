@@ -1,0 +1,16 @@
+
+<div class="card align-self-center justify-content-center ParentCard  border-0 " >
+    <div class="card-header">
+        <h2>Input Output Demo</h2>
+    </div>
+    <div class="card-body">
+       <textarea name="Messagebox" placeholder="Enter message...." id="msgBox" cols="30" class="form-control overflow-auto" rows="5"></textarea>
+    </div>
+    <div class="card-footer d-flex justify-content-evenly">
+        <button class="btn btn-secondary"  (click)="SendMessage()" >Send</button>
+        <button class="btn btn-danger" (click)="ClearMessage()" >Clear</button>
+    </div>
+</div>
+
+<app-child [messageFromParent]="ParentMessage"></app-child>
+

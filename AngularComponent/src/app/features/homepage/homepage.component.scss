@@ -1,0 +1,21 @@
+.ParentCard{
+   
+    width: 400px;
+    justify-self: center;
+    margin-top: 10%;
+    background-color: gray;
+    color: white;
+
+    .card-body
+    {
+        background:rgba($color: #e3e3e3, $alpha: 1.0);
+        color: white;
+    }
+    .card-footer{
+        background:rgba($color: #facfcf, $alpha: 1.0);
+        color: white;
+        
+    }
+
+
+}
