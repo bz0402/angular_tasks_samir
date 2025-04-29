@@ -14,7 +14,14 @@
     </div>
   
     <div class="right-box">
-      <h2>Selected Colors</h2>
+
+      <h2 [appLastColor]="selectedColors[selectedColors.length - 1]" class="color-text">
+        Selected Color
+      </h2>
+      <div>
+        <button (click)="clearColors()" class="btn mb-3 btn-danger btn-clear">Clear</button>
+      </div>
+      
       <div class="color-card" *ngFor="let c of selectedColors" [style.background-color]="c">
         <span>{{ c }}</span>
       </div>

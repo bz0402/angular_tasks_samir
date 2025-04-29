@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CustomeDirective } from './Directives/custome.directive';
 import { HomeComponent } from './Component/home/home.component';
 import { CardComponent } from './Component/cards/cards.component';
+import { LastColorDirective } from './Directives/last-color.directive';
 
 @NgModule({
   declarations: [
@@ -13,8 +14,8 @@ import { CardComponent } from './Component/cards/cards.component';
     CustomeDirective,
     HomeComponent,
     CardComponent,
-    // Add other components here
-    // For example:
+    LastColorDirective,
+
     
     
   ],

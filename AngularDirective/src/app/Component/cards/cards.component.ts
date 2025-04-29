@@ -36,4 +36,8 @@ export class CardComponent implements OnInit {
       this.colors.push(this.getRandomColor())
     }
   }
+
+  clearColors(){
+    this.selectedColors = [];
+  }
 }
