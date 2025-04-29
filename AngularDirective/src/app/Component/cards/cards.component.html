@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="Pannel">
+      <div class="colorpanel">
+        <span 
+          class="colors" 
+          *ngFor="let color of colors"
+          [style.background-color]="color"
+          [color]="color"
+          appCustome
+          appColorSelector
+          (colorSelected)="handleColorClick($event)">
+        </span>
+      </div>
+    </div>
+  
+    <div class="right-box">
+      <h2>Selected Colors</h2>
+      <div class="color-card" *ngFor="let c of selectedColors" [style.background-color]="c">
+        <span>{{ c }}</span>
+      </div>
+    </div>
+  </div>
+  
