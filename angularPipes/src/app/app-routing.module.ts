@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PipesComponent } from './pipes/pipes.component';
+import { PassGeneratorComponent } from './Components/pass-generator/pass-generator.component';
 
 const routes: Routes = [
-  {path:'', component:PipesComponent}
+  {path:'', component:PassGeneratorComponent}
 ];
 
 @NgModule({

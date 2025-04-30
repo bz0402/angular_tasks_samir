@@ -26,7 +26,7 @@ import { Component } from '@angular/core';
     <p>Big Number: {{ largeNumber | number }}</p>
 
     <h3>6. Slice Pipe</h3>
-    <p>Slice (0–10): {{ message | slice:0:10 }}</p>
+    <p>Slice (0-10): {{ message | slice:0:10 }}</p>
 
     <h3>7. JSON Pipe</h3>
     <p>{{ user | json }}</p>
