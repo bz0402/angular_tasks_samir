@@ -1,0 +1,70 @@
+
+.searchCard{
+    margin-top: 90px!important;
+}
+
+.animated-outline-button {
+    position: relative;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #007bff;
+    background-color: #fff;
+    border: 2px solid #007bff;
+    border-radius: 50px;
+    overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 1;
+  }
+
+  .animated-outline-button:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  .news-card {
+    border: 2px solid transparent;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+  
+    &:hover {
+      border-color: #007bff;
+    }
+  }
+  
+  .default-img {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+  }
+  
+  .read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    text-decoration: none;
+  
+    .read-more-icon {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+  
+    &:hover .read-more-icon {
+      transform: translateX(4px);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .news-card {
+      flex-direction: column;
+    }
+  
+    .default-img {
+      height: 200px;
+    }
+  }
+  
