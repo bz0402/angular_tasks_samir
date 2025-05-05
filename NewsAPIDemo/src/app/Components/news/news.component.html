@@ -34,49 +34,15 @@
           *ngFor="let news of newsData"
           class="row mb-4 p-3 border rounded shadow-sm news-item g-3 align-items-center"
         >
-          <div class="col-12 col-md-5">
-            <div *ngIf="news.urlToImage; else defaultImage">
-              <img
-                [src]="news.urlToImage"
-                class="img-fluid rounded w-100"
-                alt="News Image"
-                style="max-height: 300px; object-fit: cover"
-              />
-            </div>
-            <ng-template #defaultImage>
-              <div
-                class="d-flex justify-content-center align-items-center bg-light rounded w-100"
-                style="height: 250px"
-              >
-                <i class="bi bi-image-alt" style="font-size: 3rem; color: #ccc"></i>
-              </div>
-            </ng-template>
-          </div>
-
-          <div class="col-12 col-md-7">
-            <h5 class="fw-semibold">{{ news.title }}</h5>
-            <p class="text-muted small mb-2">{{ news.publishedAt | date: 'medium' }} | {{ news.source.name }}</p>
-            <p class="mb-2">{{ news.description }}</p>
-            <p class="text-muted">{{ news.content }}</p>
-            <a
-              [href]="news.url"
-              target="_blank"
-              class="btn btn-link read-more-btn px-3"
-            >
-              <span class="btn-text">Read more</span>
-              <i class="bi bi-arrow-right-circle-fill read-more-icon"></i>
-            </a>
-          </div>
+          <app-news-card [news]="news"></app-news-card>
         </div>
 
-        <div class="text-center" *ngIf="showLoadMore">
-          <button class="btn btn-outline-primary" (click)="loadMore()">Load More</button>
-        </div>
       </div>
 
       <div *ngIf="newsData.length === 0 && !loading" class="text-center mt-4">
         <p class="text-muted">No results found. Please try another search.</p>
       </div>
+      
     </div>
   </div>
 </div>

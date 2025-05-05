@@ -10,7 +10,6 @@ export class NewsComponent {
   newsData: any[] = [];
   visibleNews: any[] = [];
   loading = false;
-  showLoadMore = false;
   startTime: number = 0;
   endTime: number = 0;
   timeTaken: number = 0;
@@ -30,7 +29,7 @@ searchQuery: string = '';
   }
 
   fetchNews(query: string) {
-    const apiUrl = `https://newsapi.org/v2/everything?q=${query}&apiKey=90ff9aabae5a4b21801de6ad145c3d16`;
+    const apiUrl = `https://newsapi.org/v2/everything?qInTitle=${query}&apiKey=90ff9aabae5a4b21801de6ad145c3d16`;
 
     const observable = new Observable(observer => {
       fetch(apiUrl)
@@ -46,11 +45,9 @@ searchQuery: string = '';
       next: (data: any) => {
         this.newsData = data.articles;
         this.totalResults = this.newsData.length;
-        this.currentPage = 0;
-        this.loadMore();
+    
         this.endTime = performance.now();
         this.timeTaken = ((this.endTime - this.startTime) / 1000);
-        this.showLoadMore = this.newsData.length > this.pageSize;
       },
       error: () => this.loading = false,
       complete: () => this.loading = false
@@ -64,6 +61,5 @@ searchQuery: string = '';
     const end = start + this.pageSize;
     this.visibleNews = [...this.visibleNews, ...this.newsData.slice(start, end)];
     this.currentPage++;
-    this.showLoadMore = this.newsData.length > this.visibleNews.length;
   }
 }
