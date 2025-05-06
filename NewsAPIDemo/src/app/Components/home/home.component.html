@@ -1,5 +1,8 @@
 <div class="container">
-    <h1>Welcome to Our News Portal</h1>
-    <p>Click the button below to go to the news page</p>
-    <a routerLink="News" class="btn btn-custom">Go to News Page →</a>
+    <h1>Top Headlines</h1>
+  </div>
+
+  
+  <div *ngFor="let news of newses" class="row mt-5 mb-4 p-3 border rounded shadow-sm news-item g-3 align-items-center"      >
+          <app-news-card [news]="news"></app-news-card>
   </div>

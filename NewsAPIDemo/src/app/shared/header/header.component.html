@@ -12,8 +12,27 @@
 
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item active"><a class="nav-link" routerLink="/">Home</a></li>
+
         <li class="nav-item"><a class="nav-link" routerLink="News">News</a></li>
+
+      
+  <ng-container *ngIf="currentUserName; else guestLinks">
+    <li class="nav-item">
+      <a class="nav-link disabled text-light" routerLink="Profile" >{{ currentUserName }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " style="cursor: pointer;" (click)="Logout()">Logout</a>
+    </li>
+  </ng-container>
+
+  <ng-template #guestLinks>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="Login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="Register">Register</a>
+    </li>
+  </ng-template>
       </ul>
     </div>
   </div>

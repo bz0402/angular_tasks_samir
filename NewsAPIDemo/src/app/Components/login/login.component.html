@@ -1,0 +1,47 @@
+<div class="container-fluid bg-light min-vh-100 d-flex justify-content-center align-items-center p-0 m-0">
+    <div class="card shadow rounded-4 p-4" style="width: 100%; max-width: 400px;">
+      <div class="card-header bg-danger text-white text-center rounded-3">
+        <h2 class="m-0">Login</h2>
+      </div>
+  
+      <form class="mt-4" [formGroup]="LoginForm" (ngSubmit)="ValidateUser()">
+        <div class="mb-3">
+          <label for="Email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="Email"
+            class="form-control"
+            [formControlName]="'Email'"
+            placeholder="Enter your email"
+          />
+          <span
+            class="text-danger"
+            *ngIf="LoginForm.get('Email')?.touched && LoginForm.get('Email')?.invalid"
+            >Please enter a valid email.</span>
+        
+        </div>
+  
+        <div class="mb-4">
+          <label for="Password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="Password"
+            class="form-control"
+            [formControlName]="'Password'"
+            placeholder="Enter your password"
+          />
+          <span
+            *ngIf="LoginForm.get('Password')?.touched && LoginForm.get('Password')?.hasError('required')"
+            class="text-danger"
+            >Password is required</span>
+            <span *ngIf="IsError" class="text-danger">Invalid email or password</span>
+
+        </div>
+  
+        <div class="d-grid">
+          <button type="submit" class="btn btn-danger">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

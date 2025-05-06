@@ -1,0 +1,62 @@
+<div class="container-fluid bg-light min-vh-100 d-flex justify-content-center align-items-center p-0 m-0">
+  <div class="card shadow rounded-4 p-4" style="width: 100%; max-width: 400px;">
+    <div class="card-header bg-danger text-white text-center rounded-3">
+      <h2 class="m-0">Register Here</h2>
+    </div>
+
+    <form class="mt-4" [formGroup]="RegisterForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <input type="text" id="Name" class="form-control" formControlName="Name" placeholder="Enter your Name" />
+        <span *ngIf="RegisterForm.get('Name')?.touched && RegisterForm.get('Name')?.invalid" class="text-danger">
+          Name is required
+        </span>
+      </div>
+
+      <div class="mb-3">
+        <label for="Mobile" class="form-label">Mobile</label>
+        <input type="text" id="Mobile" class="form-control" formControlName="Mobile" placeholder="Enter your Mobile" />
+        <span *ngIf="RegisterForm.get('Mobile')?.touched && RegisterForm.get('Mobile')?.hasError('required')" class="text-danger">
+          Mobile is required
+        </span>
+        <span *ngIf="RegisterForm.get('Mobile')?.touched && RegisterForm.get('Mobile')?.hasError('pattern')" class="text-danger">
+          Enter a valid 10-digit mobile number
+        </span>
+      </div>
+
+      <div class="mb-3">
+        <label for="Email" class="form-label">Email</label>
+        <input type="email" id="Email" class="form-control" formControlName="Email" placeholder="Enter your email" />
+        <small class="text-danger" *ngIf="EmailError?.touched && EmailError?.invalid">
+          Please enter a valid email.
+        </small>
+      </div>
+
+      <div class="mb-3">
+        <label for="Password" class="form-label">Password</label>
+        <input type="password" id="Password" class="form-control" formControlName="Password" placeholder="Enter your password" />
+        <span *ngIf="RegisterForm.get('Password')?.touched && RegisterForm.get('Password')?.hasError('required')" class="text-danger">
+          Password is required
+        </span>
+        <span *ngIf="RegisterForm.get('Password')?.touched && RegisterForm.get('Password')?.hasError('pattern')" class="text-danger">
+          Password must contain uppercase, lowercase, number, and be 6+ chars.
+        </span>
+      </div>
+
+      <div class="mb-4">
+        <label for="ConfirmPassword" class="form-label">Confirm Password</label>
+        <input type="password" id="ConfirmPassword" class="form-control" formControlName="ConfirmPassword" placeholder="Confirm your password" />
+        <span class="text-danger" *ngIf="RegisterForm.get('ConfirmPassword')?.touched && RegisterForm.get('ConfirmPassword')?.hasError('required')">
+          Confirm Password is required
+        </span>
+        <small class="text-danger" *ngIf="passwordMismatch">
+          Passwords do not match.
+        </small>
+      </div>
+
+      <div class="d-grid">
+        <button [disabled]="RegisterForm.invalid" type="submit" class="btn btn-danger">Register</button>
+      </div>
+    </form>
+  </div>
+</div>
