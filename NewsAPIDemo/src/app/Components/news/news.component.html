@@ -8,6 +8,8 @@
           id="search"
           class="form-control rounded-start-pill"
           placeholder="Search for news"
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="searchNews()"
         />
         <button
           class="btn btn-primary rounded-end-pill"
@@ -17,32 +19,26 @@
           <i class="bi bi-search fw-bold fs-6"></i> Search
         </button>
       </div>
-
       <div *ngIf="loading && newsData.length === 0" class="text-center my-5">
         <div class="spinner-border text-primary" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
         <p class="mt-2">Loading news...</p>
       </div>
-
-      <div *ngIf="newsData.length > 0" class="">
-        <div class="mb-5  text-muted text-end">
+      <div *ngIf="newsData.length > 0">
+        <div class="mb-5 text-muted text-end">
           <small>{{ totalResults }} results found in {{ timeTaken.toFixed(2) }} seconds</small>
         </div>
-
         <div
           *ngFor="let news of newsData"
           class="row mb-4 p-3 border rounded shadow-sm news-item g-3 align-items-center"
         >
           <app-news-card [news]="news"></app-news-card>
         </div>
-
       </div>
-
       <div *ngIf="newsData.length === 0 && !loading" class="text-center mt-4">
         <p class="text-muted">No results found. Please try another search.</p>
       </div>
-      
     </div>
   </div>
 </div>

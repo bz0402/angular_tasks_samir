@@ -1,9 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { ROUTER_CONFIGURATION } from '@angular/router';
-import { of } from 'rxjs';
-import { NewsArticle, NewsResponse } from 'src/app/models/news.model';
-import { NewsService } from '../../services/News.Service';
+import { NewsResponse } from 'src/app/models/news.model';
+import { APICallService } from 'src/app/services/apicall.service';
 
 @Component({
   selector: 'app-home',
@@ -15,25 +12,21 @@ export class HomeComponent {
 
   newses: any[] = [];
 
-    constructor(private http: HttpClient,private newsService:NewsService) {}
+    constructor(private apiservice:APICallService) {}
   
     ngOnInit(): void {
       this.makeApiCall();
     }
   
     makeApiCall() {
-      const apiUrl = `https://newsapi.org/v2/top-headlines?apiKey=90ff9aabae5a4b21801de6ad145c3d16&country=us`;
-      return this.http.get<NewsResponse>(apiUrl).subscribe(
-        data => {
-          this.newses = data.articles;
+      this.apiservice.fetchNews('New').subscribe(
+        (response: NewsResponse) => {
+          this.newses = response.articles;
         },
-        error => {
+        (error) => {
           console.error('Error fetching news:', error);
         }
       );
-
-
-
     }
   
 }

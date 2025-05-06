@@ -28,7 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
         } else if (error.status === 404) {
           this.router.navigate(['/error404Page']);
         }
-
         return throwError(() => error);
       })
     );

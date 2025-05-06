@@ -16,6 +16,8 @@ import { NewsService } from './services/News.Service';
 import { LoginComponent } from './Components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './Components/register/register.component';
+import { FormsModule } from '@angular/forms';  
+
 
 @NgModule({
   declarations: [
@@ -35,7 +37,8 @@ import { RegisterComponent } from './Components/register/register.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {

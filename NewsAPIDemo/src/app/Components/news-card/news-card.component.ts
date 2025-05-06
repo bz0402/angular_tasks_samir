@@ -5,6 +5,13 @@ import { Component, Input } from '@angular/core';
   templateUrl: './news-card.component.html',
   styleUrls: ['./news-card.component.scss']
 })
-export class NewsCardComponent {
+export class NewsCardComponent  {
+
+  searchquery: string = '';
+  SearchData(search: any) 
+  {
+    this.searchquery = search;
+    
+  }
   @Input() news: any;
 }
