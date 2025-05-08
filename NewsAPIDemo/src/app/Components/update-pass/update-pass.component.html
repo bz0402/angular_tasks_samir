@@ -1,0 +1,87 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="row w-100">
+    <div class="col-md-6 mx-auto">
+      <div class="card shadow">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Update Password</h2>
+
+          <form #passwordForm="ngForm" (ngSubmit)="onSubmit(passwordForm)">
+            <div class="form-group mb-3">
+              <label for="currentPassword" class="form-label">Current Password</label>
+              <input
+                type="password"
+                id="currentPassword"
+                name="currentPassword"
+                [(ngModel)]="passwordData.currentPassword"
+                class="form-control"
+                required
+                placeholder="Enter current password"
+                #currentPassword="ngModel"
+              />
+              <div class="text-danger small mt-1" *ngIf="currentPassword.touched && currentPassword.errors?.['required']">
+                Current password is required.
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="newPassword" class="form-label">New Password</label>
+              <input
+                type="password"
+                id="newPassword"
+                name="newPassword"
+                [(ngModel)]="passwordData.newPassword"
+                class="form-control"
+                required
+                minlength="6"
+                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$"
+                placeholder="Enter new password"
+                #newPassword="ngModel"
+              />
+              <div class="text-danger small mt-1" *ngIf="newPassword.touched">
+                <div *ngIf="newPassword.errors?.['required']">New password is required.</div>
+                <div *ngIf="newPassword.errors?.['minlength']">
+                  Password must be at least 6 characters.
+                </div>
+                <div *ngIf="newPassword.errors?.['pattern']">
+                  Password must contain at least one uppercase letter, one lowercase letter, and one number.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3">
+              <label for="confirmPassword" class="form-label">Confirm New Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                [(ngModel)]="passwordData.confirmPassword"
+                class="form-control"
+                required
+                [pattern]="passwordData.newPassword"
+                placeholder="Re-enter new password"
+                #confirmPassword="ngModel"
+              />
+              <div class="text-danger small mt-1" *ngIf="confirmPassword.touched">
+                <div *ngIf="confirmPassword.errors?.['required']">Confirm password is required.</div>
+                <div *ngIf="confirmPassword.errors?.['pattern']">
+                  Passwords do not match.
+                </div>
+              </div>
+            </div>
+
+            <div class="d-grid">
+              <button
+                type="submit"
+                class="btn btn-danger btn-lg"
+                [disabled]="!passwordForm.valid"
+              >
+                Update Password
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  

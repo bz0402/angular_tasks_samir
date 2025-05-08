@@ -1,5 +1,6 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -8,34 +9,26 @@ import { Router } from '@angular/router';
   standalone: false
 })
 export class HeaderComponent {
-  
+  currentUserName: string = '';
+  isScrolled = false;
+binding: any;
 
-
-  constructor(private router: Router) {
-    
+  constructor(
+    private router: Router,
+    private localStorageService: LocalStorageService
+  ) {
+    this.localStorageService.currentUser$.subscribe(user => {
+      this.currentUserName = user ? user.Name : '';
+    });
   }
-  formData: any[] = JSON.parse(localStorage.getItem('formData') || '[]');
-  currentUser = this.formData.find((user: any) => user.isLoggedIn === true);
-  currentUserName: string = this.currentUser ? this.currentUser.Name : '';
 
   Logout() {
-    const index = this.formData.findIndex((user: any) => user.isLoggedIn === true);
-    if (index !== -1) {
-      this.formData[index].isLoggedIn = false;
-      localStorage.setItem('formData', JSON.stringify(this.formData));
-      window.location.reload();
-    }
+    this.localStorageService.logout();
+    window.location.reload();
   }
-  isScrolled = false;
-
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
-    if (window.scrollY > 50) {
-      this.isScrolled = true;
-    } else {
-      this.isScrolled = false;
-    }
+    this.isScrolled = window.scrollY > 50;
   }
-
 }

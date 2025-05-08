@@ -1,9 +1,10 @@
+// news.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { APICallService } from 'src/app/services/apicall.service';  
-import { NewsArticle } from 'src/app/models/news.model';  
-import { NewsResponse } from 'src/app/models/news.model';  
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, switchMap } from 'rxjs';
+import { APICallService } from 'src/app/services/apicall.service';
+import { NewsArticle, NewsResponse } from 'src/app/models/news.model';
+
 
 @Component({
   selector: 'app-news',
@@ -11,52 +12,41 @@ import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
+  searchQuery = '';
+  searchSubject = new Subject<string>();
   newsData: NewsArticle[] = [];
-  visibleNews: any[] = [];
   loading = false;
-  startTime: number = 0;
-  endTime: number = 0;
-  timeTaken: number = 0;
-  totalResults: number = 0;
-  currentPage = 0;
-  pageSize = 15;
-  searchQuery: string = '';  
-  private searchSubject = new Subject<string>();  
+  startTime = 0;
+  endTime = 0;
+  timeTaken = 0;
+  totalResults = 0;
 
   constructor(
-    private apiCallService: APICallService,  
+    private apiCallService: APICallService,
     private router: Router
   ) {}
 
-  ngOnInit():void {
-    this.apiCallService.searchQuery$.subscribe(query => {
-      this.searchQuery = query;
-      if (this.searchQuery.trim()) {
-        this.searchNews();
-      }    
-  });
-   
- 
+  ngOnInit(): void {
     const formData = JSON.parse(localStorage.getItem('formData') || '[]');
     const isLoggedIn = formData.some((user: any) => user.isLoggedIn === true);
     if (!isLoggedIn) {
       this.router.navigate(['/error401Page']);
     }
-  }
-  searchNews() {
-    if (!this.searchQuery.trim()) return alert('Please enter a search term');
-    this.newsData = [];
-    this.visibleNews = [];
-    this.loading = true;
-    this.startTime = performance.now();
-    this.fetchNews(this.searchQuery);
-  }
-  fetchNews(query: string) {
-    this.apiCallService.fetchNews(query).subscribe(
+
+    this.searchSubject.pipe(
+      debounceTime(1000),
+      distinctUntilChanged(),
+      filter(query => query.trim() !== ''),
+      switchMap(query => {
+        this.loading = true;
+        this.startTime = performance.now();
+        this.newsData = [];
+        return this.apiCallService.fetchNews(query);
+      })
+    ).subscribe(
       (data: NewsResponse) => {
         this.newsData = data.articles;
         this.totalResults = this.newsData.length;
-        this.visibleNews = this.newsData.slice(this.currentPage, this.currentPage + this.pageSize);
         this.endTime = performance.now();
         this.timeTaken = (this.endTime - this.startTime) / 1000;
         this.loading = false;
@@ -67,8 +57,9 @@ export class NewsComponent implements OnInit {
       }
     );
   }
+
   onSearchInputChange(event: any) {
     const query = event.target.value;
-    this.apiCallService.setSearchQuery(query); 
+    this.searchSubject.next(query);
   }
 }

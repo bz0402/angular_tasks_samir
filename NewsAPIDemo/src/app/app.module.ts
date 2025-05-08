@@ -16,7 +16,8 @@ import { NewsService } from './services/News.Service';
 import { LoginComponent } from './Components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './Components/register/register.component';
-import { FormsModule } from '@angular/forms';  
+import { FormsModule } from '@angular/forms';
+import { UpdatePassComponent } from './Components/update-pass/update-pass.component';  
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { FormsModule } from '@angular/forms';
     Error404PageComponent,
     LoginComponent,
     RegisterComponent,
+    UpdatePassComponent,
     
   ],
   imports: [

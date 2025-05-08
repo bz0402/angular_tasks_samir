@@ -6,6 +6,7 @@ import { Error401PageComponent } from './Components/error401-page/error401-page.
 import { Error404PageComponent } from './Components/error404-page/error404-page.component';
 import { LoginComponent } from './Components/login/login.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { UpdatePassComponent } from './Components/update-pass/update-pass.component';
 
 const routes: Routes = [
   {path: '',component:HomeComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'error401Page', component: Error401PageComponent },
   { path: 'Login', component: LoginComponent },
   { path: 'Register', component: RegisterComponent },
+  {path: 'Update',component:UpdatePassComponent},
   { path: '**', component: Error404PageComponent }, 
+
 
 
 ];
