@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardsComponent } from './Tasks/cards/cards.component';
+import { LoginComponent } from './auth/login/login.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
+import { TaskformComponent } from './task/taskform/taskform.component';
+import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
   {
-    path:'', component: CardsComponent
+    path:'', component: TaskformComponent
+
+  },
+  {
+    path: 'auth' ,loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   }
 ];
 

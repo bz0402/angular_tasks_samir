@@ -1,0 +1,35 @@
+nav.navbar {
+    background: linear-gradient(
+      to right,
+      #6c757d 0%,       
+      rgba(95, 94, 94, 0.5) 100%, 
+      #5d5d5d 100%        
+    );
+    color: white;
+  }
+  
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    font-size: 1rem;
+    margin-right: 1rem;
+    color: white !important;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    text-decoration: underline;
+    color: #fff !important;
+  }
+  
+  .dropdown-menu {
+    background-color: #f8f9fa;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #e9ecef;
+  }
+  
