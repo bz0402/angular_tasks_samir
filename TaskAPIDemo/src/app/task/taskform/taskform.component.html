@@ -1,1 +1,70 @@
-<p>taskform works!</p>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title mb-4">Create New Task</h2>
+
+      <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input type="text" class="form-control" id="title" formControlName="title">
+          <div *ngIf="taskForm.get('title')?.touched && taskForm.get('title')?.invalid" class="text-danger">
+            <div *ngIf="taskForm.get('title')?.errors?.['required']">Title is required.</div>
+            <div *ngIf="taskForm.get('title')?.errors?.['minlength']">Title must be at least 3 characters.</div>
+            <div *ngIf="taskForm.get('title')?.errors?.['maxlength']">Title cannot exceed 100 characters.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          <div *ngIf="taskForm.get('description')?.touched && taskForm.get('description')?.invalid" class="text-danger">
+            <div *ngIf="taskForm.get('description')?.errors?.['required']">Description is required.</div>
+            <div *ngIf="taskForm.get('description')?.errors?.['maxlength']">Description cannot exceed 500 characters.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="dueDate" class="form-label">Due Date</label>
+          <input type="date" class="form-control" id="dueDate" formControlName="dueDate">
+          <div *ngIf="taskForm.get('dueDate')?.touched && taskForm.get('dueDate')?.invalid" class="text-danger">
+            <div *ngIf="taskForm.get('dueDate')?.errors?.['required']">Due date is required.</div>
+            <div *ngIf="taskForm.get('dueDate')?.errors?.['notFuture']">Due date must be in the future.</div>
+            <div *ngIf="taskForm.get('dueDate')?.errors?.['tooFar']">Due date must be within 2 years.</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select class="form-select" id="status" formControlName="status">
+            <option value="pending">Pending</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Tags</label>
+          <div class="input-group">
+            <input type="text" class="form-control" [(ngModel)]="tagInput" [ngModelOptions]="{standalone: true}" (keyup.enter)="addTag()" placeholder="Add a tag (letters/numbers only) and press Enter">
+            <button type="button" class="btn btn-outline-secondary" (click)="addTag()">Add Tag</button>
+          </div>
+          <div class="mt-2">
+            <span *ngFor="let tag of tags" class="badge bg-secondary me-2 mb-2">
+              {{ tag }}
+              <button type="button" class="btn-close btn-close-white ms-2" (click)="removeTag(tag)"></button>
+            </span>
+          </div>
+          <div *ngIf="error && tags.length === 0" class="text-danger">At least one valid tag is required.</div>
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary" [disabled]="taskForm.invalid">
+            Create Task
+          </button>
+          <button type="button" class="btn btn-secondary" routerLink="/">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

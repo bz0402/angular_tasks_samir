@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -9,17 +10,23 @@ import { AuthService } from '../auth.service';
 })
 export class ForgotPasswordComponent {
   forgotData = {
-    email: 'dsjcsdnj'
+    email: ''
   };
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-
-  resetPassword(aaa: AuthService): void {
-    if (aaa) {
-      alert(`A reset link has been sent to ${this.forgotData.email}`);
-    } else {
-      console.warn('Form is invalid');
+  resetPassword(form: NgForm): void {
+    if (form.valid) {
+      this.authService.forgotPassword(this.forgotData.email).subscribe({
+        next: (response) => {
+          console.log('Reset link sent', response);
+          this.router.navigate(['/auth']);
+        },
+        error: (error) => {
+          console.error('Failed to send reset link', error);
+          alert(error.error.message || 'Failed to send reset link. Please try again.');
+        }
+      });
     }
   }
 }

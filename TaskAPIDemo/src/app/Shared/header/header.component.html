@@ -1,34 +1,33 @@
-<nav class="navbar navbar-expand-lg navbar-dark  shadow-sm px-4">
-    <a class="navbar-brand fw-bold" routerLink="/">MyApp</a>
-  
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  
-    <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a routerLink="/" class="nav-link" routerLinkActive="active">Home</a>
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm px-4">
+  <a class="navbar-brand fw-bold" routerLink="/">TasK Demo</a>
+
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+    <ul class="navbar-nav">
+    </ul>
+
+    <ul class="navbar-nav"> 
+      <li *ngIf="isLoggedIn; else authLinks" class="nav-item dropdown" (clickOutside)="isDropdownOpen = false">
+        <a class="nav-link dropdown-toggle" role="button" (click)="toggleDropdown($event)">
+          {{ username }}
+        </a>
+        <ul class="dropdown-menu" [class.show]="isDropdownOpen">
+          <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" (click)="logout()">Logout</a></li>
+        </ul>
+      </li>
+      <ng-template #authLinks>
+        <li class="nav-item" *ngIf="shouldShowLogin()">
+          <a class="nav-link text-white fw-medium" routerLink="/auth">Login</a>
         </li>
-     
-      </ul>
-  
-      <ul class="navbar-nav">
-        <li *ngIf="isLoggedIn; else loginLink" class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">
-            {{ username }}
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-            <li><a class="dropdown-item" (click)="toggleLogin()">Logout</a></li>
-          </ul>
+        <li class="nav-item" *ngIf="shouldShowSignup()">
+          <a class="nav-link text-white fw-medium" routerLink="/auth/signup">SignUp</a>
         </li>
-        <ng-template #loginLink>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/auth">Login</a>
-            </li>
-        </ng-template>
-      </ul>
-    </div>
-  </nav>
-  
+      </ng-template>
+    </ul>
+  </div>
+</nav>

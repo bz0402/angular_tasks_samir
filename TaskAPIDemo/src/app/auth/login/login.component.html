@@ -6,17 +6,19 @@
         <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
           <div class="form-floating mb-3">
             <input
-              type="text"
+              type="email"
               class="form-control"
-              id="username"
-              name="username"
-              placeholder="Username"
-              [(ngModel)]="loginData.username"
+              id="email"
+              name="email"
+              placeholder="Email"
+              [(ngModel)]="loginData.email"
               required
+              email
             />
-            <label for="username">Username</label>
-            <div *ngIf="loginForm.controls['username']?.invalid && (loginForm.controls['username']?.dirty || loginForm.controls['username']?.touched)" class="text-danger small mt-1">
-              Username is required
+            <label for="email">Email</label>
+            <div *ngIf="loginForm.controls['email']?.invalid && (loginForm.controls['email']?.dirty || loginForm.controls['email']?.touched)" class="text-danger small mt-1">
+              <div *ngIf="loginForm.controls['email']?.errors?.['required']">Email is required</div>
+              <div *ngIf="loginForm.controls['email']?.errors?.['email']">Please enter a valid email</div>
             </div>
           </div>
 
@@ -36,17 +38,13 @@
             </div>
           </div>
 
-          <div class="d-grid">
-            <button type="submit" class="btn btn-primary btn-lg rounded-pill" style="background-color: #4a90e2;" [disabled]="!loginForm.valid">
-              <i class="bi bi-box-arrow-in-right me-2"></i> Login
-            </button>
-          </div>
+          <button type="submit" class="btn btn-primary w-100 py-2" [disabled]="loginForm.invalid">Login</button>
         </form>
-
-        <div class="text-center mt-3">
-          <a routerLink="forgot" class="text-decoration-none text-muted">Forgot Password?</a>
-        </div>
       </div>
     </div>
   </div>
 </div>
+
+        <div class="text-center mt-3">
+          <a routerLink="forgot" class="text-decoration-none text-muted">Forgot Password?</a>
+        </div>

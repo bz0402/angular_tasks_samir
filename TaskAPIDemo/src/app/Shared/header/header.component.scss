@@ -1,35 +1,77 @@
-nav.navbar {
-    background: linear-gradient(
-      to right,
-      #6c757d 0%,       
-      rgba(95, 94, 94, 0.5) 100%, 
-      #5d5d5d 100%        
-    );
-    color: white;
+.navbar {
+  background: linear-gradient( #1e3c72);
+  filter: drop-shadow(0px 4px 4px rgb(0, 0, 0,0.5));
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+  .dropdown {
+    position: relative;
+
+    .dropdown-menu {
+      position: absolute;
+      right: 0;
+      top: 100%;
+      display: none;
+      min-width: 200px;
+      padding: 0.5rem 0;
+      margin: 0.125rem 0 0;
+      background-color: #fff;
+      border-radius: 0.25rem;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+
+      &.show {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 0.5rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: #f8f9fa;
+        }
+
+        &.text-danger:hover {
+          background-color: #dc3545;
+          color: white !important;
+        }
+      }
+
+      .dropdown-divider {
+        margin: 0.5rem 0;
+        border-top: 1px solid #e9ecef;
+      }
+    }
   }
-  
-  .navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
+
   .nav-link {
-    font-size: 1rem;
-    margin-right: 1rem;
-    color: white !important;
+    cursor: pointer;
+    
+    &.dropdown-toggle::after {
+      display: inline-block;
+      margin-left: 0.255em;
+      vertical-align: 0.255em;
+      content: "";
+      border-top: 0.3em solid;
+      border-right: 0.3em solid transparent;
+      border-bottom: 0;
+      border-left: 0.3em solid transparent;
+    }
   }
-  
-  .nav-link:hover,
-  .nav-link.active {
-    text-decoration: underline;
-    color: #fff !important;
+}
+
+.navbar-toggler {
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  padding: 0.25rem 0.5rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    box-shadow: none;
+    border-color: #ffffff;
   }
-  
-  .dropdown-menu {
-    background-color: #f8f9fa;
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
   }
-  
-  .dropdown-item:hover {
-    background-color: #e9ecef;
-  }
+}
   
