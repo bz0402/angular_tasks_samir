@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterContentInit, AfterViewInit, Component, ContentChild, ContentChildren, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -9,10 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
+  
+
+
   signupForm: FormGroup = new FormGroup({});
   errorMessage = '';
   loading = false;
-
   constructor(private fb: FormBuilder, private authService: AuthService, public router: Router) {}
 
   ngOnInit() {
@@ -24,7 +26,9 @@ export class SignupComponent implements OnInit {
     }, {
       validators: this.passwordMatchValidator
     });
+
   }
+
 
   passwordMatchValidator(g: FormGroup) {
     return g.get('password')?.value === g.get('confirmPassword')?.value
@@ -46,7 +50,6 @@ export class SignupComponent implements OnInit {
       this.authService.signup(userData).subscribe({
         next: (response) => {
           if (response.success) {
-            // Store the token if it's in the response
             if (response.data?.accessToken) {
               localStorage.setItem('accessToken', response.data.accessToken);
             }

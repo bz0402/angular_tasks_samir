@@ -57,6 +57,7 @@ export class AuthService {
             name: response.data.user.name,
             email: response.data.user.email,
             accessToken: response.data.tokens.accessToken,
+            
 
           });
         }

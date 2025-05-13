@@ -11,7 +11,7 @@ import { SignupComponent } from './signup/signup.component';
   declarations: [
     LoginComponent,
     ForgotPasswordComponent,
-    SignupComponent,
+    SignupComponent
   ],
   imports: [
     CommonModule,
@@ -19,6 +19,12 @@ import { SignupComponent } from './signup/signup.component';
     ReactiveFormsModule,   
     RouterModule,  
     AuthRoutingModule
+  ]
+  ,
+  exports: [
+    LoginComponent,
+    ForgotPasswordComponent,
+    SignupComponent
   ]
 })
 export class AuthModule { }
